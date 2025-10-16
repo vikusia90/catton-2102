@@ -1,0 +1,385 @@
+﻿<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <title>COTTON-2102</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: black;
+            
+            background-repeat: repeat;
+            cursor: url("https://cur.cursors-4u.net/cursors/cur-2/cur104.cur"), auto;
+        }
+
+        .fixed-page {
+            position: fixed;
+            inset: 0;
+            color: #00ff99;
+            font-family: "Courier New", monospace;
+            text-align: center;
+            user-select: none;
+        }
+
+        .title {
+            font-size: 60px;
+            letter-spacing: 8px;
+            margin-top: 90px;
+            font-weight: bold;
+            text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc, 0 0 30px #00ffaa;
+            animation: flicker 2s infinite;
+        }
+
+        @keyframes flicker {
+            0%, 18%, 22%, 25%, 53%, 57%, 100% {
+                opacity: 1;
+            }
+
+            20%, 24%, 55% {
+                opacity: 0.3;
+            }
+        }
+
+        marquee {
+            color: #00cc88;
+            font-size: 18px;
+            margin-top: 60px;
+            font-family: "Lucida Console", monospace;
+            text-shadow: 0 0 6px #00ffcc;
+        }
+
+        .blink {
+            animation: blink 1s infinite alternate;
+            margin-top: 50px;
+        }
+
+        @keyframes blink {
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0.2;
+            }
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+            color: #009977;
+            font-family: "Tahoma", sans-serif;
+        }
+
+        .frame {
+            position: absolute;
+            inset: 20px;
+            border: 3px solid #003322;
+            box-shadow: 0 0 30px #00ff99 inset;
+            pointer-events: none;
+        }
+
+        .symbol {
+            font-size: 22px;
+            color: #00ffaa;
+            text-shadow: 0 0 10px #00ffaa;
+        }
+
+        .cryptic {
+            margin-top: 60px;
+            color: #007755;
+            font-size: 14px;
+            font-family: monospace;
+            letter-spacing: 2px;
+        }
+
+        /* --- GIF в левом нижнем углу, но внутри рамки --- */
+        .frame {
+            position: absolute;
+            inset: 20px;
+            border: 1px solid #003322;
+            box-shadow: 0 0 30px #00ff99 inset;
+            pointer-events: none;
+            overflow: hidden; /* 🔹 ограничивает содержимое рамкой */
+        }
+
+        .corner-gif {
+            position: absolute;
+            left: 25px;
+            bottom: 25px;
+            width: 300px;
+            height: auto;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .top-image {
+            position: absolute;
+            left: 25px;
+            bottom: 200px; /* 🔹 регулирует высоту над гифкой */
+            width: 400px; /* 🔹 сделай размер таким же, если нужно */
+            height: auto;
+            z-index: 3; /* 🔹 чуть выше гифки */
+            pointer-events: none;
+        }
+
+        .frame {
+            position: absolute;
+            inset: 20px;
+            border: 3px solid #003322;
+            box-shadow: 0 0 30px #00ff99 inset;
+            pointer-events: none;
+            overflow: hidden; /* 🔹 ограничивает логотип рамкой */
+        }
+
+        /* --- Повернутая гифка --- */
+        .rotated {
+            transform: rotate(90deg);
+            transform-origin: center center; /* вращаем вокруг центра */
+        }
+
+        .corner-gif1 {
+            position: absolute;
+            left: 250px;
+            bottom: 50px;
+            width: 200px;
+            height: auto;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .bottom-right-img1 {
+            position: absolute;
+            right: 20px; /* отступ от правой границы */
+            bottom: 150px; /* отступ от нижней границы */
+            width: 150px; /* размер картинки */
+            height: auto;
+            z-index: 3;
+            pointer-events: none; /* не мешает кликам */
+        }
+
+        .gif-corner {
+            position: fixed;
+            bottom: 45px; /* отступ от низа */
+            right: 10px; /* отступ от правого края */
+            width: 200px; /* размер гифки */
+            height: auto;
+            z-index: 999; /* поверх всех элементов */
+            pointer-events: none; /* не мешает кликам */
+            animation: glitch-blink 2.5s infinite alternate; /* эффект мерцания */
+        }
+
+        /* Эффект лёгкого мигания / глитча */
+        @keyframes glitch-blink {
+            0%, 90%, 100% {
+                opacity: 1;
+                filter: none;
+            }
+
+            95% {
+                opacity: 0.6;
+                filter: contrast(1.3) brightness(1.4);
+            }
+        }
+
+        .bottom-right2 {
+            position: absolute;
+            right: 200px; /* отступ от правой границы */
+            bottom: 170px; /* отступ от нижней границы */
+            width: 200px; /* размер картинки */
+            height: auto;
+            z-index: 3;
+            pointer-events: none; /* не мешает кликам */
+        }
+
+        .bottom-right3 {
+            position: absolute;
+            right: 200px; /* отступ от правой границы */
+            bottom: 20px; /* отступ от нижней границы */
+            width: 130px; /* размер картинки */
+            height: auto;
+            z-index: 3;
+            pointer-events: none; /* не мешает кликам */
+        }
+
+        #popup {
+            position: fixed;
+            top: 25%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #00ff99;
+            font-family: "Courier New";
+            background: rgba(0, 30, 0, 0.8);
+            border: 1px solid #00aa77;
+            padding: 10px 20px;
+            font-size: 18px;
+            opacity: 0;
+            z-index: 2000;
+            text-shadow: 0 0 10px #00ffaa;
+            transition: opacity 1s ease;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="fixed-page">
+        <div class="frame">
+            <img src="C:\Users\biryu\Downloads\worp.jpg"
+                 alt="top-image"
+                 class="top-image">
+
+            <img src="C:\Users\biryu\Downloads\17285fc448d970cdd53b1b3ba11d7e66.gif"
+                 alt="corner-gif"
+                 class="corner-gif">
+
+            <img src="C:\Users\biryu\Downloads\dvdlogo.png"
+                 alt="dvd-logo"
+                 class="dvd-logo">
+
+            <img src="C:\Users\biryu\Downloads\system.gif"
+                 alt="corner-gif1"
+                 class="corner-gif1 rotated">
+
+            <img src="C:\Users\biryu\Downloads\whoiam.jpg"
+                 alt="bottom-right1"
+                 class="bottom-right-img1">
+
+            <img src="C:\Users\biryu\Downloads\isitreal.gif"
+                 alt="bottom-right2"
+                 class="bottom-right2">
+
+            <img src="C:\Users\biryu\Downloads\women.gif"
+                 alt="bottom-right3"
+                 class="bottom-right3">
+        </div>
+
+        <!-- Таймер -->
+        <div class="title" id="countdown">COTTON-2102</div>
+
+        <!-- Бегущая строка -->
+        <marquee behavior="alternate" scrollamount="5">
+            ▓▓▓ COTTON-2102 ▓▓▓ | ▓▓▓ COTTON-2102 ▓▓▓ | ▓▓▓ COTTON-2102 ▓▓▓ |
+            ▓▓▓ COTTON-2102 ▓▓▓ | ▓▓▓ COTTON-2102 ▓▓▓ | ▓▓▓ COTTON-2102 ▓▓▓
+        </marquee>
+
+        <div class="blink">
+            <img src="C:\Users\biryu\Downloads\cottonlogo.png" alt="cotton2102" width="300" />
+            <p class="symbol">Δ ∑ π ░▒▓ █ █▓▒░ π ∑ Δ</p>
+        </div>
+
+        <div class="cryptic">
+            00110011 00110000 00110001 00110010 &nbsp; / &nbsp; C2102{MIND_OVER_SIGNAL}
+        </div>
+
+        <div class="footer">© COTTON-2102 | DEEP ARCHIVE NODE | Layer: 7 | Cipher Active</div>
+    </div>
+
+    <!-- Контейнер для гифа в правом нижнем углу -->
+    <div class="gif-corner">
+        <div class="tenor-gif-embed"
+             data-postid="638673492462470455"
+             data-share-method="host"
+             data-aspect-ratio="1.33155"
+             data-width="160px">
+            <a href="https://tenor.com/view/error-windows-gif-638673492462470455">Error Windows GIF</a>
+            from <a href="https://tenor.com/search/error-gifs">Error GIFs</a>
+        </div>
+    </div>
+
+    <div id="popup">ВХОД В СЕТЬ...</div>
+
+
+    <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+
+
+    <script>
+        const dvd = document.querySelector('.dvd-logo');
+        const frame = document.querySelector('.frame');
+
+        let posX = 50, posY = 50;
+        let speedX = 2.5, speedY = 2.5;
+
+        function moveDVD() {
+            const frameRect = frame.getBoundingClientRect();
+            const dvdRect = dvd.getBoundingClientRect();
+
+            posX += speedX;
+            posY += speedY;
+
+            // отскок от левой/правой границы
+            if (posX <= 0 || posX + dvdRect.width >= frameRect.width) {
+                speedX *= -1;
+            }
+
+            // отскок от верхней/нижней границы
+            if (posY <= 0 || posY + dvdRect.height >= frameRect.height) {
+                speedY *= -1;
+            }
+
+            dvd.style.left = posX + 'px';
+            dvd.style.top = posY + 'px';
+
+            requestAnimationFrame(moveDVD);
+        }
+
+        // начальная позиция и стили
+        dvd.style.position = 'absolute';
+        dvd.style.left = posX + 'px';
+        dvd.style.top = posY + 'px';
+        dvd.style.width = '100px';
+        dvd.style.pointerEvents = 'none';
+        dvd.style.zIndex = '5';
+
+        moveDVD();
+    </script>
+
+    <script>
+        // === ТАЙМЕР ===
+        // Целевая дата: 17 октября текущего года, 21:02
+        const targetDate = new Date(new Date().getFullYear(), 9, 17, 21, 2, 0); // месяцы считаются с 0
+        const countdownElement = document.getElementById("countdown");
+
+        function updateCountdown() {
+            const now = new Date();
+            const diff = targetDate - now;
+
+            if (diff <= 0) {
+                countdownElement.textContent = "ACCESS POINT OPEN";
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / (1000 * 60)) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
+
+            countdownElement.textContent =
+                `${String(days).padStart(2, '0')}d : ` +
+                `${String(hours).padStart(2, '0')}h : ` +
+                `${String(minutes).padStart(2, '0')}m : ` +
+                `${String(seconds).padStart(2, '0')}s`;
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
+
+    <audio autoplay loop volume="0.2">
+        <source src="C:\Users\biryu\Downloads\ambient.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        setInterval(() => {
+            const popup = document.getElementById("popup");
+            popup.style.opacity = 1;
+            setTimeout(() => popup.style.opacity = 0, 2000);
+        }, 15000);
+    </script>
+</body>
+</html>
